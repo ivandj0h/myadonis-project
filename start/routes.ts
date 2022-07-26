@@ -11,22 +11,26 @@
 | ├── start/routes/cart.ts
 | ├── start/routes/customer.ts
 |
-| and then import them inside `start/routes.ts` as follows
+| and then import them inside `start/routes/index.ts` as follows
 |
-| import './routes/cart'
-| import './routes/customer'
+| import './cart'
+| import './customer'
 |
 */
 
-import Route from '@ioc:Adonis/Core/Route'
+import Route from "@ioc:Adonis/Core/Route";
 
+Route.on("/").render("welcome");
 
-Route.get('/', async () => {
-  return { 
-    status: 200,
-    message: 'Welcome to the AdonisJs API' 
-  }
-})
+Route.on("register").render("register");
+Route.post("register", "AuthController.register");
 
-// Users Routes
-Route.get('users', 'UsersController.index')
+Route.group(() => {
+  Route.get("/dashboard", "TodosController.index").as("dashboard");
+  Route.get("/todos/user", "TodosController.byUserId");
+  Route.resource("todos", "TodosController");
+}).middleware("auth");
+
+Route.on("login").render("login");
+Route.post("/login", "AuthController.login");
+Route.post("/logout", "AuthController.login").as("logout");
