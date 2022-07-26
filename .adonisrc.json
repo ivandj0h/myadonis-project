@@ -16,6 +16,9 @@
     "./start/routes",
     "./start/kernel"
   ],
+  "namespaces": {
+    "httpControllers": "App/Controllers"
+  },
   "providers": [
     "./providers/AppProvider",
     "@adonisjs/core"
