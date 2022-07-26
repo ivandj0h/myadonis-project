@@ -6,7 +6,7 @@
  */
 
 import Env from '@ioc:Adonis/Core/Env'
-import { hashConfig } from '@adonisjs/core/build/config'
+import { HashConfig } from '@ioc:Adonis/Core/Hash'
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +17,13 @@ import { hashConfig } from '@adonisjs/core/build/config'
 | defined inside `contracts` directory.
 |
 */
-export default hashConfig({
+const hashConfig: HashConfig = {
   /*
   |--------------------------------------------------------------------------
   | Default hasher
   |--------------------------------------------------------------------------
   |
-  | By default we make use of the argon hasher to hash values. However, feel
+  | By default we make use of the bcrypt hasher to hash values. However, feel
   | free to change the default value
   |
   */
@@ -70,4 +70,6 @@ export default hashConfig({
       rounds: 10,
     },
   },
-})
+}
+
+export default hashConfig

@@ -5,9 +5,17 @@
  * file.
  */
 
-import { InferListFromConfig } from '@adonisjs/core/build/config'
-import hashConfig from '../config/hash'
-
 declare module '@ioc:Adonis/Core/Hash' {
-  interface HashersList extends InferListFromConfig<typeof hashConfig> {}
+  import { HashDrivers } from '@ioc:Adonis/Core/Hash'
+
+  interface HashersList {
+    bcrypt: {
+      config: BcryptConfig,
+      implementation: BcryptContract,
+    },
+    argon: {
+      config: ArgonConfig,
+      implementation: ArgonContract,
+    },
+  }
 }
