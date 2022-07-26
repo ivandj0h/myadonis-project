@@ -21,11 +21,12 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 
-Route.get('/', async ({ request }) => {
-  /*
-   * URL: /?username=virk
-   * qs: { username: 'virk' }
-   */
-  return request.qs()
+Route.get('/', async () => {
+  return { 
+    status: 200,
+    message: 'Welcome to the AdonisJs API' 
+  }
 })
 
+// Users Routes
+Route.get('users', 'UsersController.index')
